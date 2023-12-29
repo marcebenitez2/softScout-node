@@ -24,7 +24,7 @@ function Login() {
         contra: contra,
       };
 
-      const response = await fetch("http://localhost/login.php", {
+      const response = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,6 +36,7 @@ function Login() {
       }
 
       const responseData = await response.text();
+  
 
       if (responseData.status === "success") {
         localStorage.setItem("nombreUsuario", responseData.username);
