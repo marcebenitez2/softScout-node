@@ -20,8 +20,8 @@ function Login() {
     e.preventDefault();
     try {
       const data = {
-        usuario: usuario,
-        contra: contra,
+        email: usuario,
+        password: contra,
       };
 
       const response = await fetch("http://localhost:5000/login", {
@@ -36,25 +36,26 @@ function Login() {
       }
 
       const responseData = await response.text();
-  
 
-      if (responseData.status === "success") {
-        localStorage.setItem("nombreUsuario", responseData.username);
-        localStorage.setItem("rolUsuario", responseData.rol);
-        localStorage.setItem("ramaUsuario", responseData.branch);
+      // if (responseData.status === "success") {
+      //   localStorage.setItem("nombreUsuario", responseData.username);
+      //   localStorage.setItem("rolUsuario", responseData.rol);
+      //   localStorage.setItem("ramaUsuario", responseData.branch);
 
-        sessionStorage.setItem("nombreUsuario", responseData.username);
-        sessionStorage.setItem("rolUsuario", responseData.rol);
-        sessionStorage.setItem("ramaUsuario", responseData.branch);
+      //   sessionStorage.setItem("nombreUsuario", responseData.username);
+      //   sessionStorage.setItem("rolUsuario", responseData.rol);
+      //   sessionStorage.setItem("ramaUsuario", responseData.branch);
 
-        setNombreUsuario(responseData.username);
-        setRolUsuario(responseData.rol);
-        setRamaUsuario(responseData.branch);
+      //   setNombreUsuario(responseData.username);
+      //   setRolUsuario(responseData.rol);
+      //   setRamaUsuario(responseData.branch);
 
-        navigate("/menu");
-      } else {
-        toast.error("Datos incorrectos");
-      }
+      //   navigate("/menu");
+      // } else {
+      //   toast.error("Datos incorrectos");
+      // }
+      
+      console.log(responseData)
     } catch (error) {
       console.log(error);
     }

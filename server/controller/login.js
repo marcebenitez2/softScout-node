@@ -1,4 +1,4 @@
-import userModel from "../model/loginModel";
+import userModel from "../model/loginModel.js";
 
 const loginController = {
     login: async (req, res,next)=>{
