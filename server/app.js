@@ -16,6 +16,8 @@ app.use("/login", loginRouter);
 
 app.use('/notifications',notificationsRouter)
 
+
+
 app.use((err, req, res, next) => {
   console.log(err);
   next();

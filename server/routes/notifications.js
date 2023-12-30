@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.get("/", notificationsController.getNotificactions);
 
+router.post("/", notificationsController.createNotifications);
+
 export default router;

@@ -11,6 +11,7 @@ function Formulario() {
 
   const enviar = (e) => {
     e.preventDefault();
+    
     if (
       !nombreFormulario ||
       !telefonoFormulario ||
@@ -37,9 +38,10 @@ function Formulario() {
       correo: correoFormulario,
       mensaje: mensajeFormulario,
     };
-    let url = "http://localhost/sendMessage.php";
-    postBD(data, url);
-    window.location.reload();
+  
+    postBD(data, "http://localhost:5000/notifications");
+    console.log(data);
+    // window.location.reload();
   };
 
   return (
