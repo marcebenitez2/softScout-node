@@ -19,11 +19,14 @@ const notificationsModel = {
         },
       ])
       .select("*");
-    console.log(data);
-    console.log("------------------------------");
-    console.log(error);
-    console.log("-----------------------------");
-    console.log(body);
+  },
+
+  updateView: async (id) => {
+    const { data, error } = await supabase
+      .from("notifications")
+      .update({ active: false })
+      .eq("id", id)
+      .select("*");
   },
 };
 

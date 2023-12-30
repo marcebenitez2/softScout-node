@@ -1,19 +1,10 @@
 import React from "react";
 import { updateBD } from "../services/updateBD";
-import UserContext from "../services/userContext";
-import { useContext } from "react";
 
 function ModalNotificaciones({ isOpen, toClose, seleccionada, texto }) {
-  const { nombreUsuario } = useContext(UserContext);
-
   const enviarCambios = () => {
-    const data = {
-      id: seleccionada.id,
-      nombre: seleccionada.name,
-      usuario: nombreUsuario,
-    };
-    updateBD("https://php-scout.000webhostapp.com/changeNoti.php", data);
-    // window.location.reload();
+    updateBD(`http://localhost:5000/notifications/${seleccionada.id}`);
+    window.location.reload();
   };
 
   return (

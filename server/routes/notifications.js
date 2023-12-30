@@ -7,4 +7,6 @@ router.get("/", notificationsController.getNotificactions);
 
 router.post("/", notificationsController.createNotifications);
 
+router.post('/:id', notificationsController.updateConfirmation)
+
 export default router;

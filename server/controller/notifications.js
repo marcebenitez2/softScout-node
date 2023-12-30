@@ -11,6 +11,12 @@ const notificationsController = {
     const result = await notificationsModel.createOne(body);
     res.json(result);
   },
+
+  updateConfirmation: async (req, res) => {
+    const id = req.params.id;
+    const result = await notificationsModel.updateView(id);
+    res.json(result);
+  },
 };
 
 export default notificationsController;

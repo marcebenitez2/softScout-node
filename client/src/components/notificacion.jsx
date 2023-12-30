@@ -17,7 +17,7 @@ function Notificacion({ noti, modal, seleccionada }) {
         <span>{noti.date.substring(5, 10)}</span>
         <h3 className="text-lg font-semibold">{noti.name}</h3>
         {noti.active === false ? (
-          <span>{noti.userSystem}</span>
+          <span className="text-lg font-semibold">Visto</span>
         ) : (
           <AiOutlineCheckCircle
             className="cursor-pointer"
