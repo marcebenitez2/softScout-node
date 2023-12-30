@@ -12,6 +12,8 @@ import Calendario from "./pages/secciones/calendario";
 import Planificaciones from "./pages/secciones/planificaciones";
 import Consejos from "./pages/secciones/consejos";
 import Usuarios from "./pages/secciones/usuarios";
+import Home from "./pages/home";
+import Consulta from "./pages/consulta";
 
 function App() {
   const [emailUsuario, setEmailUsuario] = useState(
@@ -31,6 +33,8 @@ function App() {
     >
       <Router>
         <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/formulario" element={<Consulta />} />
           <Route path="/login" element={auth ? <Menu /> : <Login />} />
           <Route path="/menu" element={auth ? <Menu /> : <Login />} />
           <Route

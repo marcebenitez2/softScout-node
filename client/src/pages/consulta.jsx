@@ -1,6 +1,6 @@
 import React from 'react'
-import Formulario from '../../components/formulario'
-import InfoNav from '../../components/infoNav'
+import Formulario from '../components/formulario'
+import InfoNav from '../components/infoNav'
 
 function Consulta() {
     return (
