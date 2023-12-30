@@ -1,18 +1,14 @@
 export function checkLogin() {
-  const nombreUsuarioLocal = localStorage.getItem("nombreUsuario");
-  const rolUsuarioLocal = localStorage.getItem("rolUsuario");
-  const ramaUsuarioLocal = localStorage.getItem("ramaUsuario");
+  const emailUsuario = localStorage.getItem("emailUsuario");
+  const idUsuario = localStorage.getItem("idUsuario");
 
-  if (!!nombreUsuarioLocal && !!rolUsuarioLocal && !!ramaUsuarioLocal) {
+  if (!!emailUsuario && !!idUsuario) {
     return true; // Datos de la sesión encontrados en localStorage
   }
 
-  const nombreUsuarioSession = sessionStorage.getItem("nombreUsuario");
-  const rolUsuarioSession = sessionStorage.getItem("rolUsuario");
-  const ramaUsuarioSession = sessionStorage.getItem("ramaUsuario");
+  const emailUsuarioSession = sessionStorage.getItem("emailUsuario");
+  const idUsuarioSession = sessionStorage.getItem("idUsuario");
 
   // Verifica si los valores existen en sessionStorage para determinar si la sesión está iniciada
-  return (
-    !!nombreUsuarioSession && !!rolUsuarioSession && !!ramaUsuarioSession
-  );
+  return !!emailUsuarioSession && !!idUsuarioSession;
 }

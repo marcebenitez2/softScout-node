@@ -17,13 +17,11 @@ function Navbar() {
   const rolUsuario = localStorage.getItem("rolUsuario");
 
   const logout = () => {
-    localStorage.removeItem("nombreUsuario");
-    localStorage.removeItem("rolUsuario");
-    localStorage.removeItem("ramaUsuario");
-    sessionStorage.removeItem("nombreUsuario");
-    sessionStorage.removeItem("rolUsuario");
-    sessionStorage.removeItem("ramaUsuario");
-    navigate("/");
+    localStorage.removeItem("emailUsuario");
+    localStorage.removeItem("idUsuario");
+    sessionStorage.removeItem("emailUsuario");
+    sessionStorage.removeItem("idUsuario");
+    navigate("/login");
   };
 
   return (

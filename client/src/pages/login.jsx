@@ -9,8 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
-  const { setNombreUsuario, setRolUsuario, setRamaUsuario } =
-    useContext(UserContext);
+  const { setEmailUsuario, setIdUsuario } = useContext(UserContext);
   const [usuario, setUsuario] = useState("");
   const [contra, setContra] = useState("");
 
@@ -34,28 +33,19 @@ function Login() {
       if (!response.ok) {
         throw new Error("Error al iniciar sesión");
       }
+      const responseData = await response.json();
 
-      const responseData = await response.text();
+      console.log(responseData);
 
-      // if (responseData.status === "success") {
-      //   localStorage.setItem("nombreUsuario", responseData.username);
-      //   localStorage.setItem("rolUsuario", responseData.rol);
-      //   localStorage.setItem("ramaUsuario", responseData.branch);
-
-      //   sessionStorage.setItem("nombreUsuario", responseData.username);
-      //   sessionStorage.setItem("rolUsuario", responseData.rol);
-      //   sessionStorage.setItem("ramaUsuario", responseData.branch);
-
-      //   setNombreUsuario(responseData.username);
-      //   setRolUsuario(responseData.rol);
-      //   setRamaUsuario(responseData.branch);
-
-      //   navigate("/menu");
-      // } else {
-      //   toast.error("Datos incorrectos");
-      // }
-      
-      console.log(responseData)
+      if (responseData.error) {
+        return toast.error("Credenciales incorrectas");
+      } else {
+        localStorage.setItem("emailUsuario", responseData.data.user.email);
+        localStorage.setItem("idUsuario", responseData.data.user.id);
+        setEmailUsuario(responseData.data.user.email);
+        setIdUsuario(responseData.data.user.id);
+        navigate("/menu");
+      }
     } catch (error) {
       console.log(error);
     }

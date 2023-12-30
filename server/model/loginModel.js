@@ -9,8 +9,8 @@ const userModel = {
     if (error) {
       return { error };
     } else {
-      console.log(user);
-      return { user };
+      const session = await supabase.auth.getUser();
+      return session;
     }
   },
 };
