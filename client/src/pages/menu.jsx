@@ -13,7 +13,7 @@ function Menu() {
   if (!auth) {
     window.location.href = "/login";
   }
-  
+
   const [notificaciones, setNotificaciones] = useState([]);
   const [activas, setActivas] = useState([]);
   const [inactivas, setInactivas] = useState([]);
@@ -21,17 +21,18 @@ function Menu() {
   const [seleccionada, setSeleccionada] = useState(null);
 
   useEffect(() => {
-    fetchBD(setNotificaciones, "https://php-scout.000webhostapp.com/notification.php");
+    fetchBD(setNotificaciones, "http://localhost:5000/notifications");
   }, []);
 
   useEffect(() => {
     setActivas(
-      notificaciones.filter((notificacion) => notificacion.active === "1")
+      notificaciones.filter((notificacion) => notificacion.active === true)
     );
     setInactivas(
-      notificaciones.filter((notificacion) => notificacion.active !== "1")
+      notificaciones.filter((notificacion) => notificacion.active === false)
     );
   }, [notificaciones]);
+
 
   return (
     <main>

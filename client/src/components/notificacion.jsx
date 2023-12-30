@@ -16,10 +16,14 @@ function Notificacion({ noti, modal, seleccionada }) {
       <div className="w-full flex justify-between">
         <span>{noti.date.substring(5, 10)}</span>
         <h3 className="text-lg font-semibold">{noti.name}</h3>
-        {noti.active !== "1" ? (
+        {noti.active === false ? (
           <span>{noti.userSystem}</span>
         ) : (
-          <AiOutlineCheckCircle className="cursor-pointer" size={"25px"} onClick={() => seleccionar()} />
+          <AiOutlineCheckCircle
+            className="cursor-pointer"
+            size={"25px"}
+            onClick={() => seleccionar()}
+          />
         )}
       </div>
       <p>{noti.message}</p>
