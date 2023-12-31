@@ -12,7 +12,7 @@ function Beneficiarios() {
   const [seleccionada, setSeleccionada] = useState(null);
 
   useEffect(() => {
-    fetchBD(setBeneficiarios, "http://localhost/beneficiaries.php");
+    fetchBD(setBeneficiarios, "http://localhost:5000/beneficiaries");
   }, []);
 
   console.log(beneficiarios);

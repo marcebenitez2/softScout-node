@@ -42,11 +42,6 @@ function Tabla({ beneficiarios, setModalOpen, setSeleccionada }) {
 
   // Funcion para cambiar los valores de 0 y 1 por Si y No
   useEffect(() => {
-    beneficiarios.forEach((x) => {
-      x.active = x.active === "1" ? "Si" : "No";
-      x.medical_file = x.medical_file === "1" ? "Si" : "No";
-      x.personal_file = x.personal_file === "1" ? "Si" : "No";
-    });
     setBeneficiariosCopia(beneficiarios);
   }, [beneficiarios]);
 
@@ -109,10 +104,38 @@ function Tabla({ beneficiarios, setModalOpen, setSeleccionada }) {
                 <td className="w-1/12 h-full">{beneficiario.tel}</td>
                 <td className="w-1/12 h-full">{beneficiario.mail}</td>
                 <td className="w-1/12 h-full">{beneficiario.branch}</td>
-                <td className="w-1/12 h-full">{beneficiario.personal_file}</td>
-                <td className="w-1/12 h-full">{beneficiario.medical_file}</td>
+                <td
+                  className={`w-1/12 h-full ${
+                    beneficiario.personal_file === true
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {beneficiario.personal_file === true
+                    ? "Entregado"
+                    : "No entregado"}
+                </td>
+                <td
+                  className={`w-1/12 h-full ${
+                    beneficiario.medical_file === true
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {beneficiario.medical_file === true
+                    ? "Entregado"
+                    : "No entregado"}
+                </td>
                 <td className="w-1/12 h-full">{beneficiario.cuota}</td>
-                <td className="w-1/12 h-full">{beneficiario.active}</td>
+                <td
+                  className={`w-1/12 h-full ${
+                    beneficiario.active === true
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {beneficiario.active === true ? "Activo" : "Inactivo"}
+                </td>
                 <td onClick={() => seleccionarBeneficiario(beneficiario)}>
                   Editar
                 </td>
