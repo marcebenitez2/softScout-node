@@ -12,6 +12,27 @@ const beneficiariesModel = {
       return data;
     }
   },
+
+  addBeneficiary: async (beneficiary) => {
+    const { data, error } = await supabase
+      .from("beneficiaries")
+      .insert([
+        {
+          name: beneficiary.nombre,
+          dni: beneficiary.dni,
+          birth: beneficiary.nacimiento,
+          direction: beneficiary.direccion,
+          tel: beneficiary.telefono,
+          mail: beneficiary.mail,
+          branch: beneficiary.rama,
+          personal_file: beneficiary.personal,
+          medical_file: beneficiary.medical,
+          cuota: beneficiary.cuota,
+          active: beneficiary.activo,
+        },
+      ])
+      .select("*");
+  },
 };
 
 export default beneficiariesModel;

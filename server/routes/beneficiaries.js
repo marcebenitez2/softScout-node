@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.get('/',beneficiariesController.getBeneficiaries)
 
+router.post('/',beneficiariesController.addBeneficiary)
+
 export default router;

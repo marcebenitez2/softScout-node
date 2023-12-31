@@ -2,29 +2,56 @@ import React from "react";
 import { ramas } from "../services/ramas";
 import { useState, useEffect } from "react";
 import { postBD } from "../services/postBD";
+import { updateBD } from "../services/updateBD";
 import { ToastContainer, toast } from "react-toastify";
 
 function ModalBeneficiarios({ isOpen, toClose, seleccionada, beneficiarios }) {
   if (!isOpen) {
     return null;
   }
-  const [id, setId] = useState(seleccionada ? seleccionada.id : "");
+  const [id, setId] = useState(seleccionada ? seleccionada.id : null);
   const [nombre, setNombre] = useState(seleccionada ? seleccionada.name : "");
   const [dni, setDni] = useState(seleccionada ? seleccionada.dni : "");
-  const [nacimiento, setNacimiento] = useState(seleccionada ? seleccionada.birth : "");
-  const [direccion, setDireccion] = useState(seleccionada ? seleccionada.direction : "");
-  const [telefono, setTelefono] = useState(seleccionada ? seleccionada.tel : "");
+  const [nacimiento, setNacimiento] = useState(
+    seleccionada ? seleccionada.birth : ""
+  );
+  const [direccion, setDireccion] = useState(
+    seleccionada ? seleccionada.direction : ""
+  );
+  const [telefono, setTelefono] = useState(
+    seleccionada ? seleccionada.tel : ""
+  );
   const [mail, setMail] = useState(seleccionada ? seleccionada.mail : "");
-  const [rama, setRama] = useState(seleccionada ? seleccionada.branch : "Manada");
-  const [personal, setPersonal] = useState(seleccionada ? seleccionada.personal_file : "");
-  const [medical, setMedical] = useState(seleccionada ? seleccionada.medical_file : "");
+  const [rama, setRama] = useState(
+    seleccionada ? seleccionada.branch : "Manada"
+  );
+  const [personal, setPersonal] = useState(
+    seleccionada ? seleccionada.personal_file : false
+  );
+  const [medical, setMedical] = useState(
+    seleccionada ? seleccionada.medical_file : false
+  );
   const [cuota, setCuota] = useState(seleccionada ? seleccionada.cuota : "");
-  const [activo, setActivo] = useState(seleccionada ? seleccionada.active : "");
-  
+  const [activo, setActivo] = useState(
+    seleccionada ? seleccionada.active : false
+  );
 
   const guardarCambios = (e) => {
     e.preventDefault();
-    console.log(id,dni,nombre,nacimiento,direccion,telefono,mail,rama,personal,medical,cuota,activo);
+    console.log(
+      id,
+      dni,
+      nombre,
+      nacimiento,
+      direccion,
+      telefono,
+      mail,
+      rama,
+      personal,
+      medical,
+      cuota,
+      activo
+    );
     if (
       !nombre ||
       !nacimiento ||
@@ -61,10 +88,6 @@ function ModalBeneficiarios({ isOpen, toClose, seleccionada, beneficiarios }) {
       return;
     }
 
-    const personalValue = personal === "Si" ? 1 : 0;
-    const medicalValue = medical === "Si" ? 1 : 0;
-    const activoValue = activo === "Si" ? 1 : 0;
-
     const beneficiario = {
       id,
       nombre,
@@ -74,15 +97,24 @@ function ModalBeneficiarios({ isOpen, toClose, seleccionada, beneficiarios }) {
       telefono,
       mail,
       rama,
-      personal: personalValue, // Asigna el valor convertido
-      medical: medicalValue, // Asigna el valor convertido
+      personal,
+      medical,
       cuota,
-      activo: activoValue,
+      activo,
     };
 
-    postBD(beneficiario, "http://localhost/addBeneficiarie.php");
-    toClose(false);
-    window.location.reload();
+    if (beneficiario.id) {
+      updateBD(
+        beneficiario,
+        `http://localhost:5000/beneficiaries/${beneficiario.id}`
+      );
+      toClose(false);
+      window.location.reload();
+    } else {
+      postBD(beneficiario, "http://localhost:5000/beneficiaries");
+      toClose(false);
+      window.location.reload();
+    }
   };
 
   useEffect(() => {
@@ -103,7 +135,7 @@ function ModalBeneficiarios({ isOpen, toClose, seleccionada, beneficiarios }) {
                 <input
                   required
                   className="dark:bg-custon-black border rounded-md px-2 py-1 "
-                 defaultValue={seleccionada ? seleccionada.name : ""}
+                  defaultValue={seleccionada ? seleccionada.name : ""}
                   onChange={(e) => setNombre(e.target.value)}
                 />
               </article>
@@ -179,8 +211,8 @@ function ModalBeneficiarios({ isOpen, toClose, seleccionada, beneficiarios }) {
                   required
                   type="checkbox"
                   className="w-6 h-6"
-                  checked={personal === "Si"} // Establecer el estado inicial en función de personal
-                  onChange={(e) => setPersonal(e.target.checked ? "Si" : "No")} // Actualizar el estado en el evento onChange
+                  checked={personal === true ? true : false}
+                  onChange={(e) => setPersonal(e.target.checked ? true : false)}
                 />
               </article>
               <article className="flex flex-col items-center">
@@ -189,8 +221,8 @@ function ModalBeneficiarios({ isOpen, toClose, seleccionada, beneficiarios }) {
                   required
                   type="checkbox"
                   className="w-6 h-6"
-                  checked={medical === "Si"} // Establecer el estado inicial en función de medical
-                  onChange={(e) => setMedical(e.target.checked ? "Si" : "No")} // Actualizar el estado en el evento onChange
+                  checked={medical === true ? true : false}
+                  onChange={(e) => setMedical(e.target.checked ? true : false)}
                 />
               </article>
               <article className="flex flex-col items-center">
@@ -209,8 +241,8 @@ function ModalBeneficiarios({ isOpen, toClose, seleccionada, beneficiarios }) {
                   required
                   type="checkbox"
                   className="w-6 h-6"
-                  checked={activo === "Si"} // Establecer el estado inicial en función de activo
-                  onChange={(e) => setActivo(e.target.checked ? "Si" : "No")} // Actualizar el estado en el evento onChange
+                  checked={activo === true ? true : false}
+                  onChange={(e) => setActivo(e.target.checked ? true : false)}
                 />
               </article>
             </div>

@@ -4,9 +4,7 @@ export const updateBD = async (url) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json", 
-      },
-  
-      
+      },    
     });
 
     // Ver la respuesta en la consola
