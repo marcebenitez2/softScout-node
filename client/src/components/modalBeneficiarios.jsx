@@ -103,10 +103,11 @@ function ModalBeneficiarios({ isOpen, toClose, seleccionada, beneficiarios }) {
       activo,
     };
 
+
     if (beneficiario.id) {
       updateBD(
-        beneficiario,
-        `http://localhost:5000/beneficiaries/${beneficiario.id}`
+        `http://localhost:5000/beneficiaries/${beneficiario.id}`,
+        beneficiario
       );
       toClose(false);
       window.location.reload();
@@ -117,9 +118,7 @@ function ModalBeneficiarios({ isOpen, toClose, seleccionada, beneficiarios }) {
     }
   };
 
-  useEffect(() => {
-    console.log(dni);
-  }, [dni]);
+
 
   return (
     <main>

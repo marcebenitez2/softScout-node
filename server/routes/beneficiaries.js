@@ -1,11 +1,12 @@
-import express from 'express';
-import beneficiariesController from '../controller/beneficiaries.js';
-
+import express from "express";
+import beneficiariesController from "../controller/beneficiaries.js";
 
 const router = express.Router();
 
-router.get('/',beneficiariesController.getBeneficiaries)
+router.get("/", beneficiariesController.getBeneficiaries);
 
-router.post('/',beneficiariesController.addBeneficiary)
+router.post("/", beneficiariesController.addBeneficiary);
+
+router.post("/:id", beneficiariesController.updateBeneficiary);
 
 export default router;

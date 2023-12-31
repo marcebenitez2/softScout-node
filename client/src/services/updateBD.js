@@ -1,10 +1,11 @@
-export const updateBD = async (url) => {
+export const updateBD = async (url,datos) => {
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json", 
       },    
+      body: JSON.stringify(datos),
     });
 
     // Ver la respuesta en la consola
