@@ -3,6 +3,7 @@ import cors from "cors";
 import loginRouter from "./routes/login.js";
 import notificationsRouter from "./routes/notifications.js";
 import beneficiariesRouter from "./routes/beneficiaries.js";
+import inventaryRouter from "./routes/inventory.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -18,6 +19,8 @@ app.use("/login", loginRouter);
 app.use('/notifications',notificationsRouter)
 
 app.use('/beneficiaries', beneficiariesRouter)
+
+app.use('/inventory', inventaryRouter)
 
 app.use((err, req, res, next) => {
   console.log(err);

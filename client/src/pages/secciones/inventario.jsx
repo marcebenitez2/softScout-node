@@ -14,7 +14,7 @@ function Inventario() {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   useEffect(() => {
-    fetchBD(setInventario, "http://localhost/inventory.php");
+    fetchBD(setInventario, "http://localhost:5000/inventory");
   }, []);
 
   return (
