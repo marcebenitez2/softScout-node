@@ -7,6 +7,6 @@ router.get("/", beneficiariesController.getBeneficiaries);
 
 router.post("/", beneficiariesController.addBeneficiary);
 
-router.post("/:id", beneficiariesController.updateBeneficiary);
+router.put("/:id", beneficiariesController.updateBeneficiary);
 
 export default router;

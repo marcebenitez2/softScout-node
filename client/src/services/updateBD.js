@@ -1,7 +1,7 @@
 export const updateBD = async (url,datos) => {
   try {
     const response = await fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json", 
       },    

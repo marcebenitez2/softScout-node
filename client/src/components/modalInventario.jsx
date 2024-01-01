@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ramas } from "../services/ramas";
 import { postBD } from "../services/postBD";
 import { ToastContainer, toast } from "react-toastify";
+import { updateBD } from "../services/updateBD";
 
 function ModalInventario({ isOpen, toClose, seleccionada, inventario }) {
   if (!isOpen) {
@@ -42,9 +43,16 @@ function ModalInventario({ isOpen, toClose, seleccionada, inventario }) {
       rama: rama,
     };
 
-    postBD(item, "http://localhost/addItem.php");
-    toClose(false);
-    window.location.reload();
+    if (item.id) {
+      updateBD(`http://localhost:5000/inventory/${item.id}`, item);
+      toClose(false);
+      window.location.reload();
+    } else {
+      // Aca para agregar
+      postBD(item, "http://localhost:5000/inventory");
+      toClose(false);
+      window.location.reload();
+    }
   };
 
   return (
