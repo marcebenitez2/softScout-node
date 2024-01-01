@@ -4,6 +4,7 @@ import loginRouter from "./routes/login.js";
 import notificationsRouter from "./routes/notifications.js";
 import beneficiariesRouter from "./routes/beneficiaries.js";
 import inventaryRouter from "./routes/inventory.js";
+import calendaryRouter from "./routes/calendary.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -21,6 +22,8 @@ app.use('/notifications',notificationsRouter)
 app.use('/beneficiaries', beneficiariesRouter)
 
 app.use('/inventory', inventaryRouter)
+
+app.use('/calendary', calendaryRouter)
 
 app.use((err, req, res, next) => {
   console.log(err);
