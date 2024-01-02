@@ -3,6 +3,7 @@ import { ramas } from "../services/ramas";
 import { useState } from "react";
 import { postPlanificacionesFireBase } from "../services/fetchFirebase";
 import { postBD } from "../services/postBD";
+import { updateBD } from "../services/updateBD";
 import { FaRegFileArchive } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -11,15 +12,17 @@ function ModalConsejo({ isOpen, toClose, seleccionado, setSeleccionado }) {
     return null;
   }
 
-  const [fecha, setFecha] = useState(seleccionado ? seleccionado.fecha : "");
+  const [fecha, setFecha] = useState(seleccionado ? seleccionado.date : "");
   const [horaInicio, setHoraInicio] = useState(
-    seleccionado ? seleccionado.horaInicio : ""
+    seleccionado ? seleccionado.starttime : ""
   );
-  const [titulo, setTitulo] = useState(seleccionado ? seleccionado.titulo : "");
-  const [lugar, setLugar] = useState(seleccionado ? seleccionado.lugar : "");
-  const [rama, setRama] = useState(seleccionado ? seleccionado.rama : "Todos");
+  const [titulo, setTitulo] = useState(seleccionado ? seleccionado.title : "");
+  const [lugar, setLugar] = useState(seleccionado ? seleccionado.location : "");
+  const [rama, setRama] = useState(
+    seleccionado ? seleccionado.branch : "Todos"
+  );
   const [archivo, setArchivo] = useState(
-    seleccionado ? seleccionado.url : null
+    seleccionado ? seleccionado.urlfile : null
   );
 
   const guardarCambios = (e) => {
@@ -33,7 +36,7 @@ function ModalConsejo({ isOpen, toClose, seleccionado, setSeleccionado }) {
     let item;
 
     if (seleccionado) {
-      // Aca seria para actualizar un dato
+      // Aca seria para actualizar un dato pero con archivo
       if (archivo !== null && archivo !== undefined) {
         postPlanificacionesFireBase(archivo).then((url) => {
           item = {
@@ -45,12 +48,13 @@ function ModalConsejo({ isOpen, toClose, seleccionado, setSeleccionado }) {
             rama: rama,
             archivo: url,
           };
-          postBD(item, "http://localhost/addadvice.php");
+          updateBD(`http://localhost:5000/advices/${seleccionado.id}`, item);
           toClose(false);
           setSeleccionado(null);
           window.location.reload();
         });
       } else {
+        // Aca seria para actualizar un dato pero sin archivo
         item = {
           id: seleccionado.id,
           fecha: fecha,
@@ -59,14 +63,14 @@ function ModalConsejo({ isOpen, toClose, seleccionado, setSeleccionado }) {
           lugar: lugar,
           rama: rama,
         };
-        postBD(item, "http://localhost/addadvice.php");
+        updateBD(`http://localhost:5000/advices/${seleccionado.id}`, item);
         toClose(false);
         setSeleccionado(null);
 
         window.location.reload();
       }
     } else {
-      // Aca seria para agregar un dato
+      // Aca seria para agregar un dato con archivo
       if (archivo !== null && archivo !== undefined) {
         postPlanificacionesFireBase(archivo).then((url) => {
           item = {
@@ -84,6 +88,7 @@ function ModalConsejo({ isOpen, toClose, seleccionado, setSeleccionado }) {
           window.location.reload();
         });
       } else {
+        // Aca seria para agregar un dato pero sin archivo
         item = {
           fecha: fecha,
           horaInicio: horaInicio,
@@ -91,10 +96,9 @@ function ModalConsejo({ isOpen, toClose, seleccionado, setSeleccionado }) {
           lugar: lugar,
           rama: rama,
         };
-        postBD(item, "http://localhost/addadvice.php");
+        postBD(item, "http://localhost:5000/advices");
         toClose(false);
         setSeleccionado(null);
-
         window.location.reload();
       }
     }

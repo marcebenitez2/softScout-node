@@ -18,10 +18,11 @@ function Consejos() {
   };
 
   useEffect(() => {
-    fetchBD(setConsejos, "http://localhost/advices.php");
+    fetchBD(setConsejos, "http://localhost:5000/advices");
   }, []);
 
   useEffect(() => {
+    console.log(consejos);
     const consejosOrdenados = consejos.sort((a, b) => {
       return new Date(b.fecha) - new Date(a.fecha);
     });
@@ -58,19 +59,23 @@ function Consejos() {
               <div className="w-full flex justify-around">
                 <div className="flex flex-col w-full">
                   <span className="font-semibold">Titulo</span>
-                  <span>{x.titulo}</span>
+                  <span>{x.title}</span>
                 </div>
                 <div className="flex flex-col w-full">
                   <span className="font-semibold">Fecha</span>
-                  <span>{x.fecha}</span>
+                  <span>{x.date}</span>
+                </div>
+                <div className="flex flex-col w-full">
+                  <span className="font-semibold">Hora</span>
+                  <span>{x.starttime}</span>
                 </div>
                 <div className="flex flex-col w-full">
                   <span className="font-semibold">Lugar</span>
-                  <span>{x.lugar}</span>
+                  <span>{x.location}</span>
                 </div>
                 <div className="flex flex-col w-full">
                   <span className="font-semibold">Rama</span>
-                  <span>{x.rama}</span>
+                  <span>{x.branch}</span>
                 </div>
                 <div className="flex flex-col w-full">
                   <span className="font-semibold">Archivo acta</span>
