@@ -12,9 +12,9 @@ function InfoEvento({ eventoSeleccionado, isOpen }) {
           <div className="flex w-full">
             <div className="flex flex-col gap-2 w-full">
               <p>Fecha: {eventoSeleccionado.date}</p>
-              <p>Fecha fin:{eventoSeleccionado.endDate}</p>
-              <p>Hora inicio: {eventoSeleccionado.startTime}</p>
-              <p>Hora fin: {eventoSeleccionado.endTime}</p>
+              <p>Fecha fin: {eventoSeleccionado.enddate}</p>
+              <p>Hora inicio: {eventoSeleccionado.starttime}</p>
+              <p>Hora fin: {eventoSeleccionado.endtime}</p>
             </div>
             <div className="flex flex-col w-full">
               <p>Lugar: {eventoSeleccionado.location}</p>
@@ -32,12 +32,12 @@ function InfoEvento({ eventoSeleccionado, isOpen }) {
           <div className="flex w-full gap-5 mt-4">
             {eventoSeleccionado.plans.map((planificacion) => (
               <a
-                href={planificacion.plan_url}
+                href={planificacion.url}
                 className="flex gap-2 text-red-600"
-                key={planificacion.plan_url}
+                key={planificacion.url}
               >
                 <FaRegFileWord fill="white" />
-                {planificacion.plan_title}
+                {planificacion.title}
               </a>
             ))}
           </div>

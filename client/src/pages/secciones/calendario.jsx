@@ -15,6 +15,8 @@ function Calendario() {
   const [fecha, setFecha] = useState(new Date());
   const [eventoSeleccionado, setEventoSeleccionado] = useState(null);
 
+
+  // Funcion para cuando se clickee una fecha
   function onClickDay(value) {
     const fechaSeleccionada = format(value, "yyyy-MM-dd");
     setFecha(fechaSeleccionada);
@@ -23,7 +25,7 @@ function Calendario() {
   }
 
   useEffect(() => {
-    fetchBD(setEventos, "http://localhost/calendary.php");
+    fetchBD(setEventos, "http://localhost:5000/calendary");
   }, []);
 
 

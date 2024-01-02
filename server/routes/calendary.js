@@ -5,5 +5,7 @@ const router = express.Router();
 
 router.get("/", calendaryController.getCalendary);
 
+router.post("/", calendaryController.addEvent);
+
 
 export default router;

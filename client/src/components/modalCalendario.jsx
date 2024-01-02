@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ramas } from "../services/ramas";
 import { ToastContainer, toast } from "react-toastify";
 import { postBD } from "../services/postBD";
+import { updateBD } from "../services/updateBD";
 
 function ModalCalendario({
   isOpen,
@@ -61,7 +62,7 @@ function ModalCalendario({
       rama: rama,
     };
     console.log(evento);
-    
+
     if (!nombre || !lugar || !fecha || !inicio || !fin || !rama || !tipo) {
       toast.error("Rellena todos los campos");
       return;
@@ -72,10 +73,14 @@ function ModalCalendario({
       return;
     }
 
-
-    postBD(evento, "http://localhost/addEvent.php");
-    toClose(false);
-    window.location.reload();
+    if (evento.id) {
+      // Si el evento ya existe, se actualiza
+      updateBD(``, evento);
+    } else {
+      postBD(evento, "http://localhost:5000/calendary");
+      toClose(false);
+      window.location.reload();
+    }
   };
 
   const eliminarEvento = (e) => {
