@@ -7,6 +7,8 @@ router.get("/", advicesController.getAdvices);
 
 router.post("/", advicesController.createAdvice);
 
-router.put('/:id', advicesController.updateAdvice)
+router.put("/:id", advicesController.updateAdvice);
+
+router.delete("/:id", advicesController.deleteAdvice);
 
 export default router;

@@ -22,6 +22,12 @@ const advicesController = {
     const result = await advicesModel.updateOne(id, datos);
     res.json(result);
   },
+
+  deleteAdvice: async (req, res) => {
+    const id = req.params.id;
+    const result = await advicesModel.deleteOne(id);
+    res.json(result);
+  },
 };
 
 export default advicesController;

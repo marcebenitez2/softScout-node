@@ -5,12 +5,14 @@ import { useEffect } from "react";
 import { fetchBD } from "../../services/fetchBD";
 import ModalConsejo from "../../components/modalConsejo";
 import { HiUserGroup } from "react-icons/hi";
+import ModalEliminarConsejos from "../../components/modalEliminarConsejos";
 
 function Consejos() {
   const [modalOpen, setModalOpen] = useState(false);
   const [consejos, setConsejos] = useState([]);
   const [seleccionado, setSeleccionado] = useState(null);
   const [ordenados, setOrdenados] = useState([]);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const cambiarSeleccionado = (x) => {
     setSeleccionado(x);
@@ -34,17 +36,19 @@ function Consejos() {
       <Navbar />
       <div
         className={`w-full h-full ${
-          modalOpen ? "blur" : ""
+          modalOpen || deleteModalOpen ? "blur" : ""
         } flex flex-col gap-4`}
       >
         <h1 className="text-3xl text-center dark:text-white">Consejos</h1>
-
-        <button
-          onClick={() => setModalOpen(true)}
-          className="bg-custon-red px-4 py-1 absolute right-20"
-        >
-          Agregar
-        </button>
+        <div className="absolute right-20 flex gap-4">
+          <button onClick={() => setDeleteModalOpen(true)}>Eliminar</button>
+          <button
+            onClick={() => setModalOpen(true)}
+            className="bg-custon-red px-4 py-1"
+          >
+            Agregar
+          </button>
+        </div>
 
         <div className="w-full flex flex-col gap-4 px-20">
           {ordenados.map((x) => (
@@ -79,8 +83,8 @@ function Consejos() {
                 </div>
                 <div className="flex flex-col w-full">
                   <span className="font-semibold">Archivo acta</span>
-                  {x.url ? (
-                    <a href={x.url} target="_blank" rel="noreferrer">
+                  {x.urlfile ? (
+                    <a href={x.urlfile} target="_blank" rel="noreferrer">
                       <span>Descargar</span>
                     </a>
                   ) : (
@@ -97,6 +101,11 @@ function Consejos() {
         toClose={setModalOpen}
         seleccionado={seleccionado}
         setSeleccionado={setSeleccionado}
+      />
+      <ModalEliminarConsejos
+        isOpen={deleteModalOpen}
+        toClose={setDeleteModalOpen}
+        consejos={consejos}
       />
     </main>
   );

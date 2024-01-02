@@ -46,6 +46,18 @@ const advicesModel = {
       return data;
     }
   },
+
+  deleteOne: async (id) => {
+    const { data, error } = await supabase
+      .from("advices")
+      .delete()
+      .match({ id: id });
+    if (error) {
+      return { error };
+    } else {
+      return data;
+    }
+  },
 };
 
 export default advicesModel;

@@ -28,7 +28,7 @@ app.use("/calendary", calendaryRouter);
 
 app.use("/plans", plansRouter);
 
-app.use('/advices',advicesRouter)
+app.use("/advices", advicesRouter);
 
 app.use((err, req, res, next) => {
   console.log(err);
