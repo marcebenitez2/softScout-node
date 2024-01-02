@@ -11,7 +11,7 @@ function Planificaciones() {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   useEffect(() => {
-    fetchBD(setArchivos, "http://localhost/plans.php");
+    fetchBD(setArchivos, "http://localhost:5000/plans");
   }, []);
 
 

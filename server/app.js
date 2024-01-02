@@ -5,6 +5,7 @@ import notificationsRouter from "./routes/notifications.js";
 import beneficiariesRouter from "./routes/beneficiaries.js";
 import inventaryRouter from "./routes/inventory.js";
 import calendaryRouter from "./routes/calendary.js";
+import plansRouter from "./routes/plans.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -14,16 +15,17 @@ const port = process.env.PORT || 5000;
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 
-
 app.use("/login", loginRouter);
 
-app.use('/notifications',notificationsRouter)
+app.use("/notifications", notificationsRouter);
 
-app.use('/beneficiaries', beneficiariesRouter)
+app.use("/beneficiaries", beneficiariesRouter);
 
-app.use('/inventory', inventaryRouter)
+app.use("/inventory", inventaryRouter);
 
-app.use('/calendary', calendaryRouter)
+app.use("/calendary", calendaryRouter);
+
+app.use("/plans", plansRouter);
 
 app.use((err, req, res, next) => {
   console.log(err);

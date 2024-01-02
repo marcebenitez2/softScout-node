@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { postBD } from "../services/postBD";
-import { set } from "date-fns";
+import { deleteDB } from "../services/deleteDB";
 
 function ModalEliminarArchivo({ isOpen, toClose, archivos }) {
   const [aEliminar, setaEliminar] = useState([]);
 
   function agregarAEliminar(id) {
     const parsedId = parseInt(id, 10);
-  
+
     if (!isNaN(parsedId)) {
       if (!aEliminar.includes(parsedId)) {
         setaEliminar([...aEliminar, parsedId]);
@@ -16,12 +15,15 @@ function ModalEliminarArchivo({ isOpen, toClose, archivos }) {
       }
     }
   }
-  
-  
 
   function handleGuardarCambios() {
-
-    postBD(aEliminar,"http://localhost/deletePlans.php")
+    if (aEliminar.length === 1) {
+      deleteDB(`http://localhost:5000/plans/${aEliminar[0]}`);
+    } else {
+      aEliminar.forEach((id) => {
+        deleteDB(`http://localhost:5000/plans/${id}`);
+      });
+    }
     setaEliminar([]);
     toClose(false);
     window.location.reload();
