@@ -3,6 +3,7 @@ import { ramas } from "../services/ramas";
 import { ToastContainer, toast } from "react-toastify";
 import { postBD } from "../services/postBD";
 import { updateBD } from "../services/updateBD";
+import { deleteDB } from "../services/deleteDB";
 
 function ModalCalendario({
   isOpen,
@@ -85,19 +86,8 @@ function ModalCalendario({
 
   const eliminarEvento = (e) => {
     e.preventDefault();
-    const evento = {
-      id: id,
-      nombre: nombre,
-      fecha: fecha,
-      fechaFin: fechaFin,
-      inicio: inicio,
-      fin: fin,
-      lugar: lugar,
-      descripcion: descripcion,
-      tipo: tipo,
-      rama: rama,
-    };
-    postBD(evento, "http://localhost/deleteEvent.php");
+    const id = eventoSeleccionado.id;
+    deleteDB(`http://localhost:5000/calendary/${id}`);
     toClose(false);
     window.location.reload();
   };

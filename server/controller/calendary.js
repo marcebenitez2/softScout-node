@@ -19,6 +19,12 @@ const calendaryController = {
     const result = await calendaryModel.updateOne(id, datos);
     res.status(200).json(result);
   },
+
+  deleteEvent: async (req,res)=>{
+    const id = req.params.id;
+    const result = await calendaryModel.deleteOne(id);
+    res.status(200).json(result);
+  }
 };
 
 export default calendaryController;

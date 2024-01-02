@@ -9,5 +9,8 @@ router.post("/", calendaryController.addEvent);
 
 router.put("/:id", calendaryController.updateEvent);
 
+// Para eliminar un evento
+router.delete("/:id", calendaryController.deleteEvent);
+
 
 export default router;

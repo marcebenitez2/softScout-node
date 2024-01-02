@@ -56,6 +56,14 @@ const calendaryModel = {
       .eq("id", id)
       .select("*");
   },
+
+  deleteOne: async (id) => {
+    const { data, error } = await supabase
+      .from("calendary")
+      .delete()
+      .eq("id", id)
+      .select("*");
+  },
 };
 
 export default calendaryModel;
