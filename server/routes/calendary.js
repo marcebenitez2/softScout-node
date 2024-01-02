@@ -7,5 +7,7 @@ router.get("/", calendaryController.getCalendary);
 
 router.post("/", calendaryController.addEvent);
 
+router.put("/:id", calendaryController.updateEvent);
+
 
 export default router;

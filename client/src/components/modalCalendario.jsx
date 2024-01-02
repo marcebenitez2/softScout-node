@@ -14,7 +14,6 @@ function ModalCalendario({
   if (!isOpen) {
     return null;
   }
-  console.log(eventoSeleccionado);
 
   const [id, setId] = useState(
     eventoSeleccionado ? eventoSeleccionado.id : null
@@ -29,13 +28,13 @@ function ModalCalendario({
     eventoSeleccionado ? eventoSeleccionado.date : fechaSeleccionada
   );
   const [fechaFin, setFechaFin] = useState(
-    eventoSeleccionado ? eventoSeleccionado.endDate : fechaSeleccionada
+    eventoSeleccionado ? eventoSeleccionado.enddate : fechaSeleccionada
   );
   const [inicio, setInicio] = useState(
-    eventoSeleccionado ? eventoSeleccionado.startTime : null
+    eventoSeleccionado ? eventoSeleccionado.starttime : null
   );
   const [fin, setFin] = useState(
-    eventoSeleccionado ? eventoSeleccionado.endTime : null
+    eventoSeleccionado ? eventoSeleccionado.endtime : null
   );
   const [rama, setRama] = useState(
     eventoSeleccionado ? eventoSeleccionado.branch : "Todos"
@@ -74,8 +73,9 @@ function ModalCalendario({
     }
 
     if (evento.id) {
-      // Si el evento ya existe, se actualiza
-      updateBD(``, evento);
+      updateBD(`http://localhost:5000/calendary/${evento.id}`, evento);
+      toClose(false);
+      window.location.reload();
     } else {
       postBD(evento, "http://localhost:5000/calendary");
       toClose(false);

@@ -6,12 +6,19 @@ const calendaryController = {
     res.status(200).json(calendary);
   },
 
-  addEvent: async (req,res)=>{
+  addEvent: async (req, res) => {
     const datos = req.body;
     // console.log(datos);
     const result = await calendaryModel.addEvent(datos);
     res.status(200).json(result);
-  }
+  },
+
+  updateEvent: async (req, res) => {
+    const id = req.params.id;
+    const datos = req.body;
+    const result = await calendaryModel.updateOne(id, datos);
+    res.status(200).json(result);
+  },
 };
 
 export default calendaryController;
