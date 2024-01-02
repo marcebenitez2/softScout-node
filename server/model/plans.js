@@ -10,6 +10,22 @@ const plansModel = {
     }
   },
 
+  createOne: async (datos) => {
+    const { error } = await supabase.from("plans").insert([
+      {
+        title: datos.titulo,
+        branch: datos.rama,
+        event: datos.evento,
+        url: datos.archivo,
+      },
+    ]);
+    if (error) {
+      return { error };
+    } else {
+      return {};
+    }
+  },
+
   deleteOne: async (id) => {
     const { error } = await supabase.from("plans").delete().match({ id });
     if (error) {

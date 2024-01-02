@@ -25,10 +25,8 @@ function ModalAgregarArchivo({ isOpen, toClose }) {
       return;
     }
 
-
     postPlanificacionesFireBase(archivo)
       .then((url) => {
-
         const item = {
           titulo: titulo,
           evento: evento,
@@ -36,9 +34,7 @@ function ModalAgregarArchivo({ isOpen, toClose }) {
           archivo: url,
         };
 
-     
-
-        postBD(item, "http://localhost/addPlans.php");
+        postBD(item, "http://localhost:5000/plans");
         toClose(false);
         window.location.reload();
       })
@@ -49,7 +45,7 @@ function ModalAgregarArchivo({ isOpen, toClose }) {
 
   const [eventos, setEventos] = useState(null);
   useEffect(() => {
-    fetchBD(setEventos, "http://localhost/calendary.php");
+    fetchBD(setEventos, "http://localhost:5000/calendary");
   }, []);
 
   return (
